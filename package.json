@@ -10,6 +10,7 @@
   "author": "vamsiampolu",
   "license": "ISC",
   "devDependencies": {
+    "dotenv": "^2.0.0",
     "npm-install-webpack-plugin": "^4.0.4",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
