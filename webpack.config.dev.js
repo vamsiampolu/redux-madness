@@ -3,11 +3,9 @@ var constants = require('./webpack.config.constants')
 var HmrPlugin = webpack.HotModuleReplacementPlugin
 var NpmPlugin = require('npm-install-webpack-plugin')
 /*
-  When I reconfigure:
 
-  1. DEV_SOURCEMAP goes to dotenv
-  1.1 DEV_HOST and DEV_PORT go to dotenv
-  2. DEV_OUTPUT remains in constants but uses dotenv(??)
+  Use CSSModules when  configuring CSS loader
+
  */
 
 var config = {
@@ -28,7 +26,7 @@ var config = {
     loaders: [
       {
         test: constants.REGEX.CSS,
-        loaders: ['style', 'css']
+        loaders: ['style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss']
       },
       {
         test: constants.REGEX.FONT,
