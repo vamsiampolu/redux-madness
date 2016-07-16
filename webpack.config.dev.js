@@ -24,6 +24,29 @@ var config = {
     host: constants.DEV_HOST,
     port: constants.DEV_PORT
   },
+  module: {
+    loaders: [
+      {
+        test: constants.REGEX.CSS,
+        loaders: ['style', 'css']
+      },
+      {
+        test: constants.REGEX.FONT,
+        loader: 'url',
+        query: {
+          limit: 50000
+        }
+      },
+      {
+        test: constants.REGEX.IMAGE,
+        loader: 'file'
+      },
+      {
+        test: constants.REGEX.SVG,
+        loader: 'svg-sprite'
+      }
+    ]
+  },
   plugins: [
     new NpmPlugin(constants.plugins.NPM),
     new HmrPlugin(constants.plugins.HMR)

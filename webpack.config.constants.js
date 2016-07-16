@@ -21,6 +21,8 @@ var path = require('path')
 var template = require('html-webpack-template')
 require('dotenv').config()
 
+var _package = require('./package.json')
+var dependencies = Object.keys(_package.dependencies)
 var SRC_PATH = path.resolve(process.env.DEV_ENTRY)
 var DEV_ENTRY = path.join(SRC_PATH, 'index.js')
 var DEV_OUTPUT_PATH = path.resolve(process.env.DEV_OUTPUT_PATH)
@@ -40,7 +42,21 @@ var constants = {
   DEV_HOST: process.env.DEV_HOST,
   REGEX: {
     JSX: /\.jsx?$/,
-    DEVDEP: /(^babel-?.*|.*-plugin$|.*-loader)/
+    DEVDEP: /(^babel-?.*|.*-plugin$|.*-loader)/,
+    CSS: /\.css$/,
+    FONT: /\.(eot|ttf|woff|woff2)$/,
+    IMAGE: /\.(jpe?g|png|gif)$/i,
+    SVG: /\.svg$/
+  },
+  PROD_ENTRY: {
+    app: DEV_ENTRY,
+    vendor: dependencies,
+    style: ['./src/app.css']
+  },
+  PROD_OUTPUT: {
+    path: DEV_OUTPUT_PATH,
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[chunkhash].js'
   },
   plugins: {
     NPM: {
