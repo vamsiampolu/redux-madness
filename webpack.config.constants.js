@@ -78,6 +78,31 @@ var constants = {
     ENV: {
       sample: process.env.DOTENV_SAMPLE_PATH,
       path: process.env.DOTENV_PATH
+    },
+    CHUNKS: {
+      names: ['vendor', 'manifest'],
+      minChunks: Infinity
+    },
+    PURIFY: {
+      basePath: process.cwd(),
+      paths: [DEV_ENTRY],
+      info: true
+    },
+    UGLIFY: {
+      compress: {
+        warnings: false,
+        drop_console: true
+      },
+      mangle: {
+        except: ['$', '_', 'L', 'webpackJsonp'],
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      beautify: false,
+      comments: false
+    },
+    CLEAN: {
+      root: process.cwd()
     }
   }
 }

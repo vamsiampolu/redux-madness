@@ -52,12 +52,14 @@ var config = {
     }
   },
   devtool: 'source-map',
-// plugins: [
-//   new CommonsChunkPlugin(chunks),
-//   new ExtractTextPlugin('[name][chunkhash].css'),
-//   new PurifyCssPlugin(purifyConfig),
-//   new UglifyJsPlugin(uglifyConfig),
-//   new VisualizerPlugin(),
-//   new CleanPlugin([DIST_PATH], cleanPluginConfig)
-// ]
+  plugins: [
+    new CommonsChunkPlugin(constants.plugins.CHUNKS),
+    new ExtractTextPlugin('[name][chunkhash].css'),
+    new PurifyCssPlugin(constants.plugins.PURIFY),
+    new UglifyJsPlugin(constants.plugins.UGLIFY),
+    new VisualizerPlugin(),
+    new CleanPlugin([constants.PROD_OUTPUT.path], constants.plugins.CLEAN)
+  ]
 }
+
+module.exports = config
