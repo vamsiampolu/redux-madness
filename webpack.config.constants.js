@@ -58,6 +58,9 @@ var constants = {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[chunkhash].js'
   },
+  CSS_LOADER_QUERY: 'modules&importLoaders=1&' + process.env.CSS_CLASSNAMES,
+  IMAGE_LOADER_QUERY: 'hash=sha512&digest=hex&name=[hash].[ext]',
+  SVG_LOADER_QUERY: 'name=[name].[hash]',
   plugins: {
     NPM: {
       dev: function (module) {

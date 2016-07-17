@@ -8,7 +8,6 @@
     development, production and testing(if I can)
  */
 
-require('dotenv').config()
 var merge = require('webpack-merge')
 var validator = require('webpack-validator')
 var constants = require('./webpack.config.constants')
@@ -19,12 +18,16 @@ var config = {}
 switch (env) {
   case constants.DEV: {
     var devConfig = require('./webpack.config.dev')
-    config = merge(commonConfig, devConfig)
+    config = validator(merge(commonConfig, devConfig))
     break
   }
   case constants.PROD: {
+    var Joi = validator.Joi
+    var schemaExtension = Joi.object({
+      imageWebpackLoader: Joi.any()
+    })
     var prodConfig = require('./webpack.config.prod')
-    config = merge(commonConfig, prodConfig)
+    config = validator(merge(commonConfig, prodConfig), {schemaExtension})
     break
   }
   case constants.TEST: {
@@ -33,4 +36,4 @@ switch (env) {
   }
 }
 
-module.exports = validator(config)
+module.exports = config

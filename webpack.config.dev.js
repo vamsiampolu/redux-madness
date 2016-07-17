@@ -26,7 +26,7 @@ var config = {
     loaders: [
       {
         test: constants.REGEX.CSS,
-        loaders: ['style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss']
+        loaders: ['style', 'css?' + constants.CSS_LOADER_QUERY, 'postcss']
       },
       {
         test: constants.REGEX.FONT,

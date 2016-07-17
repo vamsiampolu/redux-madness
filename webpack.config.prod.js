@@ -16,18 +16,18 @@ var config = {
     loaders: [
       {
         test: constants.REGEX.CSS,
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss')
+        loader: ExtractTextPlugin.extract('style', 'css?' + constants.CSS_LOADER_QUERY + '!postcss')
       },
       {
         test: constants.REGEX.IMAGE,
         loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
+          'file?' + constants.IMAGE_LOADER_QUERY,
           'image-webpack'
         ]
       },
       {
         test: constants.REGEX.SVG,
-        loader: ['svg-sprite?name=[name].[hash]', 'image-webpack']
+        loaders: ['svg-sprite?' + constants.SVG_LOADER_QUERY, 'image-webpack']
       }
     ]
   },
