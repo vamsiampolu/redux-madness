@@ -1,6 +1,15 @@
-// load all your svgs from a folder using require.context like this:
-// var files = require.context('svg-sprite!images/logos', false, /(twitter|facebook|youtube)\.svg$/)
-// files.keys().forEach(files)
-// just use xlinkHref with svg sprites
-// there is a production config for this.
-console.log('Hello World')
+import { renderWithHmr, configureStore } from './hmr'
+import routes from './routes'
+import { browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
+
+const store = configureStore({})
+const history = syncHistoryWithStore(browserHistory, store)
+
+if (module.hot) {
+  module.hot.accept('./Root', () => {
+    setTimeout(() => renderWithHmr({routes, store, history}), 0)
+  })
+}
+
+renderWithHmr({routes, store})
